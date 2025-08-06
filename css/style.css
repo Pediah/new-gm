@@ -129,6 +129,7 @@
         border: none;
         margin-top: 0;
         top: 150%;
+        opacity: 0;
         visibility: hidden;
         transition: .5s;
     }
