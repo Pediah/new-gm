@@ -6,6 +6,10 @@
   --bs-gold: #f5d442; /* golden rod */
     --bs-rose-gold-dark: #b46a6d;
   --bs-rose-gold-light: #e7c1a5;
+  
+}
+.text-black {
+  color: #000 !important;
 }
 
 .bg-gold {
