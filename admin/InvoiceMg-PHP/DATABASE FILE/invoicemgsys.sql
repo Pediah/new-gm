@@ -1,15 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2021 at 05:15 PM
--- Server version: 5.6.21
--- PHP Version: 5.6.3
-CREATE DATABASE IF NOT EXISTS `invoicemgsys`;
-USE `invoicemgsys`;
+-- Generation Time: Aug 11, 2025 at 09:33 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -45,7 +44,7 @@ CREATE TABLE `customers` (
   `town_ship` varchar(255) NOT NULL,
   `county_ship` varchar(255) NOT NULL,
   `postcode_ship` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `customers`
@@ -59,7 +58,8 @@ INSERT INTO `customers` (`id`, `invoice`, `name`, `email`, `address_1`, `address
 (47, '7', 'Test Customer', 'testc@mail.com', '110 Test Address', '116 Test Address', 'Testown', 'TestCn', '00225', '7777777770', 'Test Customer', '110 Test Address', '116 Test Address', 'Testown', 'TestCn', '00225'),
 (48, '8', 'Demo User', 'demouser@mail.com', '115 Demo Address', '115 Demo Address', 'DemoTown', 'DemoCn', '00020', '7777777777', 'Demo User', '115 Demo Address', '115 Demo Address', 'DemoTown', 'DemoCn', '00020'),
 (49, '9', 'Wendy Reilly', 'wendy@mail.com', '3605 Cost Avenue', '3605 Cost Avenue', 'Wharton', 'US', '77488', '3214444444', 'Wendy Reilly', '3605 Cost Avenue', '3605 Cost Avenue', 'Wharton', 'US', '77488'),
-(50, '10', 'Rose Thompson', 'thompsonr@mail.com', '2374 Berkley Street', '2374 Berkley Street', 'Northampton', 'US', '01010', '7410000020', 'Rose Thompson', '2374 Berkley Street', '2374 Berkley Street', 'Northampton', 'US', '01010');
+(50, '10', 'Rose Thompson', 'thompsonr@mail.com', '2374 Berkley Street', '2374 Berkley Street', 'Northampton', 'US', '01010', '7410000020', 'Rose Thompson', '2374 Berkley Street', '2374 Berkley Street', 'Northampton', 'US', '01010'),
+(51, '10', 'Paul', 'paulpmeck@gmail.com', '47 william lynn st', '47 william lynn st', 'white river', 'South Africa', '1240', '0679371350', 'Paul', '47 william lynn st', '47 william lynn st', 'white river', 'South Africa', '1240');
 
 -- --------------------------------------------------------
 
@@ -81,23 +81,24 @@ CREATE TABLE `invoices` (
   `notes` text NOT NULL,
   `invoice_type` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `invoices`
 --
 
 INSERT INTO `invoices` (`id`, `invoice`, `custom_email`, `invoice_date`, `invoice_due_date`, `subtotal`, `shipping`, `discount`, `vat`, `total`, `notes`, `invoice_type`, `status`) VALUES
-(42, '1', '', '12/11/2021', '14/11/2021', '523', '55', '6', '58', '636', 'Completed!', 'invoice', 'paid'),
-(44, '2', '', '12/11/2021', '13/11/2021', '395', '85', '4', '48', '528', 'none', 'invoice', 'paid'),
-(47, '3', '', '13/11/2021', '15/11/2021', '132', '65', '0', '20', '217', 'none', 'invoice', 'paid'),
-(46, '4', '', '13/11/2021', '17/11/2021', '270', '65', '3', '34', '369', '', 'invoice', 'open'),
-(48, '5', '', '13/11/2021', '17/11/2021', '405', '20', '3', '43', '468', 'none', 'invoice', 'open'),
-(49, '6', '', '13/11/2021', '18/11/2021', '534', '40', '7', '57', '631', '', 'invoice', 'open'),
-(51, '7', '', '13/11/2021', '16/11/2021', '600', '20', '4', '62', '682', 'Cleared Up!', 'invoice', 'paid'),
-(52, '8', '', '13/11/2021', '15/11/2021', '153', '20', '2', '17', '190', '', 'invoice', 'open'),
-(53, '9', '', '15/11/2021', '17/11/2021', '115', '25', '0', '14', '154', '', 'invoice', 'open'),
-(54, '10', '', '15/11/2021', '16/11/2021', '154', '30', '2', '18', '202', '', 'invoice', 'open');
+(42, '1', '', '12/11/2021', '14/11/2021', 523, 55, 6, 58, 636, 'Completed!', 'invoice', 'paid'),
+(44, '2', '', '12/11/2021', '13/11/2021', 395, 85, 4, 48, 528, 'none', 'invoice', 'paid'),
+(47, '3', '', '13/11/2021', '15/11/2021', 132, 65, 0, 20, 217, 'none', 'invoice', 'paid'),
+(46, '4', '', '13/11/2021', '17/11/2021', 270, 65, 3, 34, 369, '', 'invoice', 'open'),
+(48, '5', '', '13/11/2021', '17/11/2021', 405, 20, 3, 43, 468, 'none', 'invoice', 'open'),
+(49, '6', '', '13/11/2021', '18/11/2021', 534, 40, 7, 57, 631, '', 'invoice', 'open'),
+(51, '7', '', '13/11/2021', '16/11/2021', 600, 20, 4, 62, 682, 'Cleared Up!', 'invoice', 'paid'),
+(52, '8', '', '13/11/2021', '15/11/2021', 153, 20, 2, 17, 190, '', 'invoice', 'open'),
+(53, '9', '', '15/11/2021', '17/11/2021', 115, 25, 0, 14, 154, '', 'invoice', 'open'),
+(54, '10', '', '15/11/2021', '16/11/2021', 154, 30, 2, 18, 202, '', 'invoice', 'open'),
+(55, '10', 'paulpmeck@gmail.com', '08/08/2025', '31/08/2025', 172, 0, -63, 17, 189, '', 'invoice', 'open');
 
 -- --------------------------------------------------------
 
@@ -113,7 +114,7 @@ CREATE TABLE `invoice_items` (
   `price` varchar(255) NOT NULL,
   `discount` varchar(255) NOT NULL,
   `subtotal` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `invoice_items`
@@ -127,7 +128,9 @@ INSERT INTO `invoice_items` (`id`, `invoice`, `product`, `qty`, `price`, `discou
 (95, '8', 'Product Seven - This is a sample product seven.', 5, '23', '0', '115.00'),
 (96, '8', 'Product Four - This is a sample product four.', 8, '5', '2', '38.00'),
 (97, '9', 'Product Seven - This is a sample product seven.', 5, '23', '0', '115.00'),
-(98, '10', 'Product Six - This is a sample product six.', 13, '12', '2', '154.00');
+(98, '10', 'Product Six - This is a sample product six.', 13, '12', '2', '154.00'),
+(99, '10', 'Product Five - This is a sample product five.', 1, '86', '', '86.00'),
+(100, '10', 'Product Seven - This is a sample product seven.', 1, '23', '', '86.00');
 
 -- --------------------------------------------------------
 
@@ -140,7 +143,7 @@ CREATE TABLE `products` (
   `product_name` text NOT NULL,
   `product_desc` text NOT NULL,
   `product_price` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `products`
@@ -178,7 +181,7 @@ CREATE TABLE `store_customers` (
   `town_ship` varchar(255) NOT NULL,
   `county_ship` varchar(255) NOT NULL,
   `postcode_ship` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `store_customers`
@@ -209,14 +212,15 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `phone` varchar(100) NOT NULL,
   `password` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `phone`, `password`) VALUES
-(1, 'Liam Moore', 'admin', 'admin@codeastro.com', '7896541250', 'd00f5d5217896fb7fd601412cb890830');
+(1, 'Liam Moore', 'admin', 'admin@codeastro.com', '7896541250', 'd00f5d5217896fb7fd601412cb890830'),
+(2, 'Paul Smith', 'Paul', 'paul@example.com', '0123456789', '25d55ad283aa400af464c76d713c07ad');
 
 --
 -- Indexes for dumped tables
@@ -266,32 +270,39 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
 --
 -- AUTO_INCREMENT for table `invoices`
 --
 ALTER TABLE `invoices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+
 --
 -- AUTO_INCREMENT for table `invoice_items`
 --
 ALTER TABLE `invoice_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=987;
+
 --
 -- AUTO_INCREMENT for table `store_customers`
 --
 ALTER TABLE `store_customers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
